@@ -80,7 +80,7 @@ if __name__ == '__main__':
     video_model_url = 'https://www.dropbox.com/s/336vn9y4qwyg9yz/ColorizeVideo_gen.pth?dl=0'
     get_model_bin(video_model_url, os.path.join(model_directory, 'ColorizeVideo_gen.pth'))
 
-    video_colorizer = get_video_colorizer(root_folder='/data/')
+    video_colorizer = get_video_colorizer(root_folder=Path('/data/'))
     video_colorizer.result_folder = Path(results_video_directory)
     
     port = 5000
