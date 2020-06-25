@@ -44,6 +44,7 @@ class BaseFilter(IFilter):
     def _model_process(self, orig: PilImage, sz: int) -> PilImage:
         model_image = self._get_model_ready_image(orig, sz)
         x = pil2tensor(model_image, np.float32)
+        print('$$$ moving to, ', self.device)
         x = x.to(self.device)
         x.div_(255)
         x, y = self.norm((x, x), do_x=True)
