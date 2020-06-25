@@ -1,3 +1,9 @@
+from deoldify import device
+from deoldify.device_id import DeviceId
+#choices:  CPU, GPU0...GPU7
+res = device.set(device=DeviceId.GPU0)
+print('device: ', res)
+
 # import the necessary packages
 import os
 import sys
@@ -7,7 +13,6 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from flask import send_file
-
 
 from app_utils import download
 from app_utils import generate_random_filename
@@ -28,12 +33,9 @@ import traceback
 
 torch.backends.cudnn.benchmark=True
 
-
-os.environ['CUDA_VISIBLE_DEVICES']='0'
+#os.environ['CUDA_VISIBLE_DEVICES']='0'
 
 app = Flask(__name__)
-
-
 
 # define a predict function as an endpoint
 @app.route("/process", methods=["POST"])
@@ -78,7 +80,7 @@ if __name__ == '__main__':
     video_model_url = 'https://www.dropbox.com/s/336vn9y4qwyg9yz/ColorizeVideo_gen.pth?dl=0'
     get_model_bin(video_model_url, os.path.join(model_directory, 'ColorizeVideo_gen.pth'))
 
-    video_colorizer = get_video_colorizer()
+    video_colorizer = get_video_colorizer(root_folder='/data/')
     video_colorizer.result_folder = Path(results_video_directory)
     
     port = 5000
