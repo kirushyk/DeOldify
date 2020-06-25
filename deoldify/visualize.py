@@ -353,8 +353,11 @@ class VideoColorizer:
         return self._build_video(source_path)
 
 
-def get_video_colorizer(render_factor: int = 21) -> VideoColorizer:
-    return get_stable_video_colorizer(render_factor=render_factor)
+def get_video_colorizer(
+    root_folder: Path = Path('./'),
+    render_factor: int = 21
+) -> VideoColorizer:
+    return get_stable_video_colorizer(root_folder=root_folder, render_factor=render_factor)
 
 
 def get_artistic_video_colorizer(
